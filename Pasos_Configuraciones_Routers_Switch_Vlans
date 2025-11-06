@@ -122,91 +122,80 @@ exit
 ****************************************************************************************
 CONFIGURACIONES DE VLANS AILADAS (Sólo hacen ICMP o Ping las PCS dentro de cada Vlan)
 ****************************************************************************************
-Switch0
+Switch0 - 192.168.1.0/24
 **********
-
-ena
-conf t
-vlan 10
-name IT
-exit
-
-
+! MODE PRIVILEGIADO
+(config)#	ena
+(config)#	conf t
+! CREAR VLAN
 (config)#	vlan 10
 (config)#	name IT
 (config)#	exit
-
+! ASIGNAR INTERFACES A VLAN
 (config)# 	interface fa0/2
-		switchport mode access
-		switchport access vlan 10
-		exit
-		interface fa0/3
-		switchport mode access
-		switchport access vlan 10
-		exit
-		interface fa0/4
-		switchport mode access
-		switchport access vlan 10
-		exit
-		exit
-		wr !guardar
+			switchport mode access
+			switchport access vlan 10
+			exit
+			interface fa0/3
+			switchport mode access
+			switchport access vlan 10
+			exit
+			interface fa0/4
+			switchport mode access
+			switchport access vlan 10
+			exit
+			exit
+			wr !guardar
 
 ***************************
-CONFIGURACIONES DE VLANS
+CONFIGURACIONES DE VLANS 
 ***************************
-Switch1
+Switch1 - 192.168.2.0/24
 **********
-vlan 30
-name RRHH
-exit
-
+! CREAR VLAN
 (config)#	vlan 20
 (config)#	name Finanzas
 (config)#	exit
-
+! ASIGNAR INTERFACES A VLAN
 (config)# 	interface fa0/2
-		switchport mode access
-		switchport access vlan 20
-		exit
-		interface fa0/3
-		switchport mode access
-		switchport access vlan 20
-		exit
-		interface fa0/4
-		switchport mode access
-		switchport access vlan 20
-		exit
-		exit
-		wr !guardar
+			switchport mode access
+			switchport access vlan 20
+			exit
+			interface fa0/3
+			switchport mode access
+			switchport access vlan 20
+			exit
+			interface fa0/4
+			switchport mode access
+			switchport access vlan 20
+			exit
+			exit
+			wr !guardar
 
 ***************************
-CONFIGURACIONES DE VLANS
+CONFIGURACIONES DE VLANS 
 ***************************
-Switch2
+Switch2 - 192.168.3.0/24
 **********
-vlan 30
-name RRHH
-exit
-
+! CREAR VLAN
 (config)#	vlan 30
 (config)#	name RRHH
 (config)#	exit
-
+! ASIGNAR INTERFACES A VLAN
 (config)# 	interface fa0/2
-		switchport mode access
-		switchport access vlan 30
-		exit
-		interface fa0/3
-		switchport mode access
-		switchport access vlan 30
-		exit
-		interface fa0/4
-		switchport mode access
-		switchport access vlan 30
-		exit
-		exit
-		wr !guardar
-
+			switchport mode access
+			switchport access vlan 30
+			exit
+			interface fa0/3
+			switchport mode access
+			switchport access vlan 30
+			exit
+			interface fa0/4
+			switchport mode access
+			switchport access vlan 30
+			exit
+			exit
+			wr !guardar
 
 ======================
 CONFIGURAR PCS
