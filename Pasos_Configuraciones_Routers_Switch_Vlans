@@ -1,0 +1,225 @@
+PROTECTO DE REDES DE COMPUTADORAS
+PACKET TRACER DE CISCO
+CONFIGURAR UNA RED BÁSICA CON 
+PROYECTO 3 SUBREDES CON VLANS
+
+Objetivo:
+Enseñar a los estudiantes la configuración en packet tracert
+los equipos de red en tres segmentos de red diferentes y Vlans Aisladas.
+
+================
+CONFIGURACIONES
+=======
+ROUTER0
+=======
+(config interface gigabit)
+ena
+conf t
+interface gigabit0/0
+ip address 192.168.1.1
+no shut
+do write
+exit
+
+(config interface serial derecha)
+interface serial0/0/0
+ip address 192.168.4.1 255.255.255.0
+no shut
+do write
+exit
+
+=======
+ROUTER1
+=======
+ena
+conf t
+
+interface gigabit0/0
+ip address 192.168.2.1 255.255.255.0
+no shut
+do write
+exit
+
+interface serial0/0/0
+ip address 192.168.4.2 255.255.255.0 !(config interface serial izquierda)
+no shut
+do write
+exit
+
+interface serial0/0/1   !(config interface serial derecha)
+ip adrees 192.168.5.2
+no shut
+do write
+exit
+
+=======
+ROUTER2
+=======
+
+ena
+conf t
+interface serial0/0/0
+ip address 192.168.5.1 255.255.255.0
+no shut
+do write
+exit
+
+interface gigabit0/0
+ip address 192.168.3.1 255.255.255.0
+no shut
+do write
+exit
+
+===========================================================
+CONFIGURACION DE ENRUTAMIENTO DINÁMICO RIPV2 A CADA ROUTER
+===========================================================
+
+========
+ROUTER0
+========
+
+ena
+conf t
+route rip
+network 192.168.1.0 !interface Gigabit del router
+network 192.168.4.0 !interface serial del router
+version 2
+exit
+exit
+copy running-config startup-config
+exit
+
+========
+ROUTER1
+========
+ena
+conf t
+route rip
+network 192.168.2.0 !interface Gigabit del router
+network 192.168.4.0 !interface serial del router
+network 192.168.5.0 !interface serial del router
+version 2
+exit
+exit
+copy running-config startup-config
+exit
+
+========
+ROUTER2
+========
+ena
+conf t
+route rip
+network 192.168.3.0 !interface Gigabit del router
+network 192.168.4.0 !interface serial del router
+network 192.168.5.0 !interface serial del router
+version 2
+exit
+exit
+copy running-config startup-config
+exit
+
+****************************************************************************************
+CONFIGURACIONES DE VLANS AILADAS (Sólo hacen ICMP o Ping las PCS dentro de cada Vlan)
+****************************************************************************************
+Switch0
+**********
+
+ena
+conf t
+vlan 10
+name IT
+exit
+
+
+(config)#	vlan 10
+(config)#	name IT
+(config)#	exit
+
+(config)# 	interface fa0/2
+		switchport mode access
+		switchport access vlan 10
+		exit
+		interface fa0/3
+		switchport mode access
+		switchport access vlan 10
+		exit
+		interface fa0/4
+		switchport mode access
+		switchport access vlan 10
+		exit
+		exit
+		wr !guardar
+
+***************************
+CONFIGURACIONES DE VLANS
+***************************
+Switch1
+**********
+vlan 30
+name RRHH
+exit
+
+(config)#	vlan 20
+(config)#	name Finanzas
+(config)#	exit
+
+(config)# 	interface fa0/2
+		switchport mode access
+		switchport access vlan 20
+		exit
+		interface fa0/3
+		switchport mode access
+		switchport access vlan 20
+		exit
+		interface fa0/4
+		switchport mode access
+		switchport access vlan 20
+		exit
+		exit
+		wr !guardar
+
+***************************
+CONFIGURACIONES DE VLANS
+***************************
+Switch2
+**********
+vlan 30
+name RRHH
+exit
+
+(config)#	vlan 30
+(config)#	name RRHH
+(config)#	exit
+
+(config)# 	interface fa0/2
+		switchport mode access
+		switchport access vlan 30
+		exit
+		interface fa0/3
+		switchport mode access
+		switchport access vlan 30
+		exit
+		interface fa0/4
+		switchport mode access
+		switchport access vlan 30
+		exit
+		exit
+		wr !guardar
+
+
+======================
+CONFIGURAR PCS
+======================
+1. Debes configurar cada PC en su segmento de red / vlans
+2. Utiliza IP estático en cada PC de acuerdo a su segmento de red
+3. Ejemplo: IP Estático, Subnet, Gateway
+
+
+
+======================
+Felicidades
+Ing. Pablo palacios
+======================
+
+
